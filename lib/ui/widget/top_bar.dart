@@ -15,6 +15,8 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
           color: AppColors.azulEscuro,
         ),
         padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Padding(
+        padding: const EdgeInsets.only(top: 25),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -66,6 +68,7 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ],
         ),
+      ),
     );
   }
 

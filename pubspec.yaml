@@ -13,10 +13,10 @@ dependencies:
   flutter:
     sdk: flutter
   salomon_bottom_bar: ^3.3.2
-
+  image_picker: ^1.1.2
   cupertino_icons: ^1.0.8
   flutter_launcher_icons: ^0.14.3
-  awesome_dialog: ^3.0.2
+  quickalert: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -29,8 +29,9 @@ flutter:
   assets:
   -  assets/
   -  assets/img/
+  -  assets/img/iconner_banner.png
 
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/img/img_app/logo 1.png"
+  image_path: "assets/img/iconner_banner.png"

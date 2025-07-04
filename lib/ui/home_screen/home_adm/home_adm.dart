@@ -1,4 +1,4 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
 import 'package:footline/ui/home_screen/nav_bar_config.dart';
@@ -13,49 +13,66 @@ class HomeAdm extends StatefulWidget {
 void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
   final TextEditingController _inputController = TextEditingController();
 
-  AwesomeDialog(
+  showDialog(
     context: context,
-    dialogType: DialogType.info,
-    animType: AnimType.bottomSlide,
-    title: 'Em Desenvolvimento',
-    body: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Text(
-          'Este recurso ainda está em fase de desenvolvimento.\n\nSe quiser visualizar assim mesmo, digite "ver mesmo assim" abaixo.',
-          style: TextStyle(fontSize: 16),
-          textAlign: TextAlign.center,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Em Desenvolvimento'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Este recurso ainda está em fase de desenvolvimento.\n\n'
+              'Se quiser visualizar assim mesmo, digite "ver mesmo assim" abaixo.',
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: _inputController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Digite aqui',
+              ),
+            ),
+          ],
         ),
-        const SizedBox(height: 20),
-        TextField(
-          controller: _inputController,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Digite aqui',
+        actions: [
+          TextButton(
+            child: const Text('Cancelar'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
           ),
-        ),
-      ],
-    ),
-    btnOkText: 'Continuar',
-    btnOkColor: AppColors.azulEscuro,
-    btnOkOnPress: () {
-      if (_inputController.text.trim().toLowerCase() == 'ver mesmo assim') {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const NavBarConfig(initialIndex: 4,)),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Digite corretamente para continuar.'),
-            backgroundColor: Colors.red,
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.azulEscuro,
+            ),
+            child: const Text('Continuar'),
+            onPressed: () {
+              if (_inputController.text.trim().toLowerCase() == 'ver mesmo assim') {
+                Navigator.of(context).pop(); // Fecha o alerta
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const NavBarConfig(initialIndex: 4),
+                  ),
+                );
+              } else {
+                Navigator.of(context).pop(); // Fecha o alerta
+                QuickAlert.show(
+                  context: context,
+                  type: QuickAlertType.error,
+                  text: 'Digite corretamente para continuar.',
+                  confirmBtnColor: Colors.red,
+                );
+              }
+            },
           ),
-        );
-      }
+        ],
+      );
     },
-    btnCancelText: 'Cancelar',
-    btnCancelOnPress: () {},
-  ).show();
+  );
 }
 
 

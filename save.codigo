@@ -1,18 +1,4 @@
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';
-
-class MyPhoto {
-  final ImagePicker _picker = ImagePicker();
-
-  Future<File?> selecionarImagem({required ImageSource source}) async {
-    final XFile? pickedFile = await _picker.pickImage(source: source);
-    if (pickedFile != null) {
-      return File(pickedFile.path);
-    }
-    return null;
-  }
-}
-import 'dart:io';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';

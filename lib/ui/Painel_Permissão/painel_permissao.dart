@@ -54,12 +54,10 @@ class _PainelPermissaoScreenState extends State<PainelPermissaoScreen> {
                 IconButton(
                   icon: const Icon(Icons.arrow_back),
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const NavBarConfig(initialIndex: 2),
-                      ),
-                    );
+                     Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const NavBarConfig(initialIndex: 3)),
+                  );
                   },
                 ),
                 const SizedBox(width: 8),

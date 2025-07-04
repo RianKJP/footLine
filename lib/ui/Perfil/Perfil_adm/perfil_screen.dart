@@ -1,11 +1,12 @@
 import 'dart:io';
-import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
 import 'package:footline/ui/home_screen/nav_bar_config.dart';
 import 'package:footline/ui/login_screen/login_screen.dart';
+import 'package:footline/ui/widget/my_photo.dart';
 import 'package:footline/ui/widget/top_bar.dart';
-
+import 'package:image_picker/image_picker.dart';
 
 class PerfilScreenADM extends StatefulWidget {
   const PerfilScreenADM({super.key});
@@ -16,53 +17,80 @@ class PerfilScreenADM extends StatefulWidget {
 
 class _PerfilScreenADMState extends State<PerfilScreenADM> {
   File? _imagemPerfil;
+  final MyPhoto _myPhoto = MyPhoto();
 
-
+  void _alterarImagem() async {
+    final imagemSelecionada =
+        await _myPhoto.selecionarImagem(source: ImageSource.gallery);
+    if (imagemSelecionada != null) {
+      setState(() {
+        _imagemPerfil = imagemSelecionada;
+      });
+    }
+  }
 void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
   final TextEditingController _inputController = TextEditingController();
-    AwesomeDialog(
+
+  showDialog(
     context: context,
-    dialogType: DialogType.info,
-    animType: AnimType.bottomSlide,
-    title: 'Em Desenvolvimento',
-    body: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Text(
-          'Este recurso ainda está em fase de desenvolvimento.\n\nSe quiser visualizar assim mesmo, digite "ver mesmo assim" abaixo.',
-          style: TextStyle(fontSize: 16),
-          textAlign: TextAlign.center,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Em Desenvolvimento'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Este recurso ainda está em fase de desenvolvimento.\n\n'
+              'Se quiser visualizar assim mesmo, digite "ver mesmo assim" abaixo.',
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            TextField(
+              controller: _inputController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Digite aqui',
+              ),
+            ),
+          ],
         ),
-        const SizedBox(height: 20),
-        TextField(
-          controller: _inputController,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Digite aqui',
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Cancelar', style: TextStyle(color: AppColors.azulEscuro),),
           ),
-        ),
-      ],
-    ),
-    btnOkText: 'Continuar',
-    btnOkColor: AppColors.azulEscuro,
-    btnOkOnPress: () {
-      if (_inputController.text.trim().toLowerCase() == 'ver mesmo assim') {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const NavBarConfig(initialIndex: 4,)),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Digite corretamente para continuar.'),
-            backgroundColor: Colors.red,
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.azulEscuro,
+            ),
+            onPressed: () {
+              final input = _inputController.text.trim().toLowerCase();
+              Navigator.of(context).pop(); // Fecha o AlertDialog
+              if (input == 'ver mesmo assim') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const NavBarConfig(initialIndex: 4),
+                  ),
+                );
+              } else {
+                QuickAlert.show(
+                  context: context,
+                  type: QuickAlertType.error,
+                  text: 'Digite corretamente para continuar.',
+                  confirmBtnColor: Colors.red,
+                );
+              }
+            },
+            child: const Text('Continuar', style: TextStyle(color: AppColors.branco),),
           ),
-        );
-      }
+        ],
+      );
     },
-    btnCancelText: 'Cancelar',
-    btnCancelOnPress: () {},
-  ).show();
+  );
 }
 
 
@@ -82,6 +110,7 @@ void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
                     alignment: Alignment.bottomRight,
                     children: [
                       GestureDetector(
+                        onTap: _alterarImagem,
                         child: CircleAvatar(
                           radius: 44,
                           backgroundImage: _imagemPerfil != null

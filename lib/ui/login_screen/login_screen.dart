@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
 import 'package:footline/ui/confirmação_login/confirmacao_login.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:quickalert/quickalert.dart';
+
 
 
 class LoginScreen extends StatefulWidget {
@@ -34,17 +35,16 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _mostrarAlertaNaoADM() {
-  AwesomeDialog(
+void _mostrarAlertaNaoADM(BuildContext context) {
+  QuickAlert.show(
     context: context,
-    dialogType: DialogType.warning,
-    animType: AnimType.bottomSlide,
+    type: QuickAlertType.warning,
     title: 'Recurso Premium',
-    desc: 'Este recurso está disponível apenas para usuários Premium. Faça upgrade para desbloquear essa funcionalidade exclusiva!',
-    btnOkText: 'Entendi',
-    btnOkColor: AppColors.azulEscuro,
-    btnOkOnPress: () {},
-  ).show();
+    text: 'Este recurso está disponível apenas para usuários Premium. '
+          'Faça upgrade para desbloquear essa funcionalidade exclusiva!',
+    confirmBtnText: 'Entendi',
+    confirmBtnColor: AppColors.azulEscuro,
+  );
 }
 
 
@@ -60,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               const SizedBox(height: 16),
               Image.asset(
-                "./assets/img/logo 1.png",
+                "./assets/img/logo_1.png",
                 width: 170,
                 fit: BoxFit.contain,
               ),
@@ -187,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       );
                     } else {
-                      _mostrarAlertaNaoADM();
+                      _mostrarAlertaNaoADM(context);
                     }
                   },
 
