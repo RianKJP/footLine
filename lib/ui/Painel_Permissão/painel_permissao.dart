@@ -12,6 +12,7 @@ class PainelPermissaoScreen extends StatefulWidget {
 class _PainelPermissaoScreenState extends State<PainelPermissaoScreen> {
   List<String> equipe = ["Carlos", "Joice", "Cabral", "Thiago"];
   List<String> pendentes = ["Pedro", "João"];
+  bool modoEdicao = false;
 
   void aceitarConvite(String nome) {
     setState(() {
@@ -26,11 +27,10 @@ class _PainelPermissaoScreenState extends State<PainelPermissaoScreen> {
     });
   }
 
-  void editarMembro(String nome) {
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Editar membro: $nome")),
-    );
+  void removerMembro(String nome) {
+    setState(() {
+      equipe.remove(nome);
+    });
   }
 
   @override
@@ -40,66 +40,86 @@ class _PainelPermissaoScreenState extends State<PainelPermissaoScreen> {
       backgroundColor: Colors.white,
       body: ListView(
         children: [
-         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border(
-              bottom: BorderSide(color: Colors.grey.shade300),
+          // Subnavbar com botão de edição
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border(
+                bottom: BorderSide(color: Colors.grey.shade300),
+              ),
             ),
-          ),
-          child: Row(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const NavBarConfig(initialIndex: 2),
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(width: 8),
-              const Text(
-                "Minha Equipe",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NavBarConfig(initialIndex: 2),
+                      ),
+                    );
+                  },
                 ),
-              ),
-            ],
-          ),
-        ),
-
-          const SizedBox(height: 8),
-          // Lista de membros da equipe
-          ...equipe.map((nome) => Container(
-            padding: const EdgeInsets.all(16),
-            child: ListTile(
-                  title: Text(nome),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.edit, color: Colors.grey),
-                    onPressed: () => editarMembro(nome),
+                const SizedBox(width: 8),
+                const Expanded(
+                  child: Text(
+                    "Minha Equipe",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
                   ),
                 ),
-          )),
+                IconButton(
+                  icon: Icon(
+                    modoEdicao ? Icons.close : Icons.edit,
+                    color: Colors.black54,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      modoEdicao = !modoEdicao;
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 8),
+
+          // Lista de membros da equipe
+          ...equipe.map((nome) => Container(
+                padding: const EdgeInsets.all(16),
+                child: ListTile(
+                  title: Text(nome),
+                  trailing: modoEdicao
+                      ? IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                          onPressed: () => removerMembro(nome),
+                        )
+                      : null,
+                ),
+              )),
 
           const SizedBox(height: 24),
 
           // Título pedidos pendentes
-          const Text(
-            "Pedidos Pendentes",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              "Pedidos Pendentes",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
           ),
           const SizedBox(height: 8),
 
           // Lista de pendentes com ações
           ...pendentes.map((nome) => Container(
-            padding: const EdgeInsets.all(16),
-            child: ListTile(
+                padding: const EdgeInsets.all(16),
+                child: ListTile(
                   title: Text(nome),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -115,7 +135,7 @@ class _PainelPermissaoScreenState extends State<PainelPermissaoScreen> {
                     ],
                   ),
                 ),
-          )),
+              )),
         ],
       ),
     );

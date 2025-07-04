@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
 import 'package:footline/ui/confirmação_login/confirmacao_login.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -31,6 +33,20 @@ class _LoginScreenState extends State<LoginScreen> {
     _idControler.dispose();
     super.dispose();
   }
+
+  void _mostrarAlertaNaoADM() {
+  AwesomeDialog(
+    context: context,
+    dialogType: DialogType.warning,
+    animType: AnimType.bottomSlide,
+    title: 'Recurso Premium',
+    desc: 'Este recurso está disponível apenas para usuários Premium. Faça upgrade para desbloquear essa funcionalidade exclusiva!',
+    btnOkText: 'Entendi',
+    btnOkColor: AppColors.azulEscuro,
+    btnOkOnPress: () {},
+  ).show();
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -163,13 +179,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     elevation: 6,
                   ),
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ConfirmacaoLogin(),
-                      ),
-                    );
+                    if (_idControler.text.trim().toLowerCase() == 'admin') {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ConfirmacaoLogin(),
+                        ),
+                      );
+                    } else {
+                      _mostrarAlertaNaoADM();
+                    }
                   },
+
                   child: const Text(
                     'Entrar',
                     style: TextStyle(

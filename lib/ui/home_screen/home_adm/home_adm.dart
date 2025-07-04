@@ -1,11 +1,65 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
 import 'package:footline/ui/home_screen/nav_bar_config.dart';
 import 'package:footline/ui/widget/top_bar.dart';
 
-class HomeAdm extends StatelessWidget {
+class HomeAdm extends StatefulWidget {
   const HomeAdm({super.key});
 
+  @override
+  State<HomeAdm> createState() => _HomeAdm();
+}
+void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
+  final TextEditingController _inputController = TextEditingController();
+
+  AwesomeDialog(
+    context: context,
+    dialogType: DialogType.info,
+    animType: AnimType.bottomSlide,
+    title: 'Em Desenvolvimento',
+    body: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Text(
+          'Este recurso ainda está em fase de desenvolvimento.\n\nSe quiser visualizar assim mesmo, digite "ver mesmo assim" abaixo.',
+          style: TextStyle(fontSize: 16),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 20),
+        TextField(
+          controller: _inputController,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Digite aqui',
+          ),
+        ),
+      ],
+    ),
+    btnOkText: 'Continuar',
+    btnOkColor: AppColors.azulEscuro,
+    btnOkOnPress: () {
+      if (_inputController.text.trim().toLowerCase() == 'ver mesmo assim') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const NavBarConfig(initialIndex: 4,)),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Digite corretamente para continuar.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    },
+    btnCancelText: 'Cancelar',
+    btnCancelOnPress: () {},
+  ).show();
+}
+
+
+class _HomeAdm extends State<HomeAdm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,12 +141,7 @@ class HomeAdm extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const NavBarConfig(initialIndex: 4),
-                    ),
-                  );
+                   _mostrarAlertaEmDesenvolvimento(context);
                 },
                 child: const Text(
                   "Relatórios de Desempenho",
@@ -105,10 +154,10 @@ class HomeAdm extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 24),
-
-            SizedBox(
-              height: 180,
+          const SizedBox(height: 36),
+           Center(
+              child:SizedBox(
+              height: 230,
               width: 180,
               child: Stack(
                 alignment: Alignment.center,
@@ -117,7 +166,7 @@ class HomeAdm extends StatelessWidget {
                     height: 180,
                     width: 180,
                     child: CircularProgressIndicator(
-                      strokeWidth: 25,
+                      strokeWidth: 40,
                       value: 0.6,
                       backgroundColor: AppColors.laranja,
                       valueColor: AlwaysStoppedAnimation<Color>(AppColors.azulEscuro),
@@ -143,6 +192,7 @@ class HomeAdm extends StatelessWidget {
                   )
                 ],
               ),
+            ),
             ),
 
             const SizedBox(height: 32),

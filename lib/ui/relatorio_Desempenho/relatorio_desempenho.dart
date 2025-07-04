@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
+import 'package:footline/ui/home_screen/nav_bar_config.dart';
 import 'package:footline/ui/widget/top_bar.dart'; // para gráfico de barras
 
 class RelatorioLojaScreen extends StatelessWidget {
@@ -15,17 +16,39 @@ class RelatorioLojaScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           children: [
             // Sub app bar
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Icon(Icons.arrow_back),
-                Text(
-                  "Relatórios da Loja",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+           Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border(
+                bottom: BorderSide(color: Colors.grey.shade300),
+              ),
+            ),
+            child: Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NavBarConfig(initialIndex: 2),
+                      ),
+                    );
+                  },
                 ),
-                Icon(Icons.edit),
+                const SizedBox(width: 8),
+                const Text(
+                  "Relatórios da Loja",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
               ],
             ),
+          ),
             const SizedBox(height: 16),
 
             const Text(
@@ -43,12 +66,11 @@ class RelatorioLojaScreen extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 24),
 
             // Gráfico Pizza
             Center(
               child:SizedBox(
-              height: 180,
+              height: 230,
               width: 180,
               child: Stack(
                 alignment: Alignment.center,
@@ -57,7 +79,7 @@ class RelatorioLojaScreen extends StatelessWidget {
                     height: 180,
                     width: 180,
                     child: CircularProgressIndicator(
-                      strokeWidth: 50,
+                      strokeWidth: 30,
                       value: 0.6,
                       backgroundColor: AppColors.laranja,
                       valueColor: AlwaysStoppedAnimation<Color>(AppColors.azulEscuro),
@@ -162,8 +184,8 @@ class _DestaqueProduto extends StatelessWidget {
           const Text("Produto mais vendido", style: TextStyle(fontSize: 12)),
           const SizedBox(height: 8),
           SizedBox(
-            height: 40,
-            child: Image.asset("assets/img/shoe.png", fit: BoxFit.contain),
+            height: 100,
+            child: Image.asset("assets/img/puma 3.webp", fit: BoxFit.contain),
           ),
           const SizedBox(height: 6),
           const Text("Quantidade vendida: 20", style: TextStyle(fontSize: 12)),
