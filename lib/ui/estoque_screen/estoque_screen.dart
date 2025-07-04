@@ -1,4 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:footline/ui/_core/app_colors.dart';
+import 'package:footline/ui/cadastro_produtos/cadastro_produtos.dart';
+import 'package:footline/ui/widget/top_bar.dart';
+import 'package:footline/ui/product_screen/product_screen.dart';
+
+class Product{
+  String name;
+  String description;
+  double price;
+  String category;
+  int stock;
+
+  Product(this.name, this.description, this.price, this.category, this.stock);
+}
 
 class EstoqueScreen extends StatefulWidget {
   const EstoqueScreen({super.key});
@@ -8,8 +22,192 @@ class EstoqueScreen extends StatefulWidget {
 }
 
 class _EstoqueScreenState extends State<EstoqueScreen> {
+
+  final TextEditingController controllerSearch = TextEditingController();
+  List<Product> listProducts = [
+    Product("Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
+    Product("Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
+    Product("Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
+    Product("Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
+    Product("Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
+    Product("Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: const TopBar(notificationCount: 3),
+      
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.azulEscuro,
+        foregroundColor: AppColors.branco,
+        elevation: 6,
+        shape: const CircleBorder(),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CadastroProdutos())
+          );
+        },
+        child: const Icon(Icons.add),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+
+      body: Column(
+
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+
+          Container(
+            alignment: Alignment.center,
+            margin: EdgeInsets.symmetric(vertical: 12),
+
+            child: SizedBox(
+              width: 329,
+              child: TextField(
+                controller: controllerSearch,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+                decoration: InputDecoration(
+                  hintText: "Digite o nome do produto",
+                  prefixIcon: Icon(
+                      Icons.search,
+                      color: AppColors.azulEscuro,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(18)
+                    ),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(vertical: 2),
+                ),
+              ),
+            ),
+          ),
+
+          Container(
+            width: 329,
+            alignment: Alignment.center,
+            child: Text(
+              "Lista de Produtos",
+              style: TextStyle(
+                fontSize: 18,
+                color: AppColors.azulEscuro,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ),
+
+          Expanded(
+            child: ListView.builder(
+              itemCount: listProducts.length,
+              itemBuilder: (context, index) {
+                final product = listProducts[index];
+                return Align(
+                  alignment: Alignment.center, // centraliza horizontalmente
+                  child: SizedBox(
+                    width: 329,  // largura fixa desejada
+                    child: Container(
+                      height: 150,
+                      margin: EdgeInsets.symmetric(vertical: 6),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: AppColors.pretoEscuro,
+                          width: 0.5,
+                        ),
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0x40000000),
+                            blurRadius: 8,
+                            offset: Offset(0, 5)
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                          child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            SizedBox(
+                              height: double.infinity,
+                              child: Image.asset(
+                                "assets/img/Adidas tenis 2.webp",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.all(8), 
+                                decoration: BoxDecoration(
+                                  color: AppColors.cinzaClaro,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      product.name,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: AppColors.azulEscuro,
+                                      ),
+                                    ),
+                                    Text(
+                                      "R\$ ${product.price.toString()}",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: AppColors.laranja, 
+                                      ),
+                                    ),
+                                    Text(
+                                      "Estoque: ${product.stock.toString()}",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: AppColors.azulEscuro
+                                      ),
+                                    ),
+                                    Text(
+                                      "Categoria: ${product.category}",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: AppColors.azulEscuro
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: TextButton(
+                                        style: TextButton.styleFrom(
+                                          backgroundColor: AppColors.laranja,
+                                          foregroundColor: AppColors.azulEscuro,
+                                          minimumSize: Size(158, 32),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => ProductScreen()),
+                                          );
+                                        },
+                                        child: Text("Mais Detalhes"),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

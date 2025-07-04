@@ -47,7 +47,7 @@ class NavBarBottom extends StatelessWidget {
           ),
           SalomonBottomBarItem(
             icon: Icon(Icons.dashboard),
-            title: Text("Painel"),
+            title: Text("Estoque"),
             selectedColor: AppColors.branco,
           ),
           SalomonBottomBarItem(
