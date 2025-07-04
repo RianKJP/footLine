@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
-import 'package:footline/ui/home_screen/home_adm/nav_bar_config.dart';
+import 'package:footline/ui/home_screen/nav_bar_config.dart';
 
 class ConfirmacaoLogin extends StatelessWidget {
   const ConfirmacaoLogin({super.key});
@@ -134,7 +134,7 @@ class ConfirmacaoLogin extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 30),
                     ],
                   ),
                 ),

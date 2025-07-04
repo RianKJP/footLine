@@ -8,8 +8,8 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea( // evita sumiço em telas com notch
-      child: Container(
+    return // evita sumiço em telas com notch
+       Container(
         height: 80, // altura segura para logo e ícones
         decoration: const BoxDecoration(
           color: AppColors.azulEscuro,
@@ -66,7 +66,6 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ],
         ),
-      ),
     );
   }
 
