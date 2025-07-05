@@ -5,13 +5,14 @@ import 'package:footline/ui/widget/top_bar.dart';
 import 'package:footline/ui/product_screen/product_screen.dart';
 
 class Product{
+  String image;
   String name;
   String description;
   double price;
   String category;
   int stock;
 
-  Product(this.name, this.description, this.price, this.category, this.stock);
+  Product(this.image, this.name, this.description, this.price, this.category, this.stock);
 }
 
 class EstoqueScreen extends StatefulWidget {
@@ -25,12 +26,12 @@ class _EstoqueScreenState extends State<EstoqueScreen> {
 
   final TextEditingController controllerSearch = TextEditingController();
   List<Product> listProducts = [
-    Product("Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
-    Product("Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
-    Product("Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
-    Product("Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
-    Product("Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
-    Product("Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
+    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
+    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
+    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
+    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
+    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
+    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
   ];
 
   @override
@@ -134,7 +135,7 @@ class _EstoqueScreenState extends State<EstoqueScreen> {
                             SizedBox(
                               height: double.infinity,
                               child: Image.asset(
-                                "assets/img/Adidas tenis 2.webp",
+                                product.image,
                                 fit: BoxFit.cover,
                               ),
                             ),
