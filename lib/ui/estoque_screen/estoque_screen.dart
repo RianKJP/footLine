@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
 import 'package:footline/ui/cadastro_produtos/cadastro_produtos.dart';
+import 'package:footline/ui/home_screen/nav_bar_config.dart';
 import 'package:footline/ui/widget/top_bar.dart';
 import 'package:footline/ui/product_screen/product_screen.dart';
 
@@ -47,7 +48,7 @@ class _EstoqueScreenState extends State<EstoqueScreen> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CadastroProdutos())
+            MaterialPageRoute(builder: (context) => NavBarConfig(initialIndex: 5,))
           );
         },
         child: const Icon(Icons.add),

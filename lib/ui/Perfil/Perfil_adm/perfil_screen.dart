@@ -258,23 +258,23 @@ void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
             ),
 
             const SizedBox(height: 5),
-           SizedBox(
-            height: 45,
-            width: double.infinity,
-            child: OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                backgroundColor: AppColors.pretoEscuro,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            SizedBox(
+              height: 45,
+              width: double.infinity,
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: AppColors.pretoEscuro,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  );
+                },
+                child: const Text("Sair da Conta", style: TextStyle(color: Color.fromARGB(255, 243, 12, 12)),),
               ),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                );
-              },
-              child: const Text("Sair da Conta", style: TextStyle(color: Color.fromARGB(255, 243, 12, 12)),),
             ),
-          ),
           ],
         ),
       ),
