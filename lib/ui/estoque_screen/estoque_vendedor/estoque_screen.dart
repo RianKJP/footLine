@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
-import 'package:footline/ui/home_screen/nav_bar_config.dart';
 import 'package:footline/ui/widget/top_bar.dart';
 import 'package:footline/ui/product_screen/product_screen.dart';
 
@@ -15,14 +14,14 @@ class Product{
   Product(this.image, this.name, this.description, this.price, this.category, this.stock);
 }
 
-class EstoqueScreen extends StatefulWidget {
-  const EstoqueScreen({super.key});
+class EstoqueScreenVD extends StatefulWidget {
+  const EstoqueScreenVD({super.key});
 
   @override
-  State<EstoqueScreen> createState() => _EstoqueScreenState();
+  State<EstoqueScreenVD> createState() => _EstoqueScreenVDState();
 }
 
-class _EstoqueScreenState extends State<EstoqueScreen> {
+class _EstoqueScreenVDState extends State<EstoqueScreenVD> {
 
   final TextEditingController controllerSearch = TextEditingController();
   List<Product> listProducts = [
@@ -38,22 +37,6 @@ class _EstoqueScreenState extends State<EstoqueScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const TopBar(),
-      
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.azulEscuro,
-        foregroundColor: AppColors.branco,
-        elevation: 6,
-        shape: const CircleBorder(),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => NavBarConfig(initialIndex: 5,))
-          );
-        },
-        child: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-
       body: Column(
 
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,7 +94,7 @@ class _EstoqueScreenState extends State<EstoqueScreen> {
                   child: SizedBox(
                     width: 350,  // largura fixa desejada
                     child: Container(
-                      height: 160,
+                      height: 180,
                       margin: EdgeInsets.symmetric(vertical: 6),
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -177,7 +160,7 @@ class _EstoqueScreenState extends State<EstoqueScreen> {
                                         color: AppColors.azulEscuro
                                       ),
                                     ),
-                                    const SizedBox(height:5),
+                                    const SizedBox(height: 5),
                                     Align(
                                       alignment: Alignment.center,
                                       child: TextButton(

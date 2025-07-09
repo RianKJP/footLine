@@ -1,167 +1,167 @@
 import 'package:flutter/material.dart';
-import 'package:footline/ui/_core/app_colors.dart';
 import 'package:footline/ui/widget/top_bar.dart';
-
-
-class Product{
-  String image;
-  String name;
-  int stock;
-
-  Product(this.image, this.name, this.stock);
-}
 
 class HomeVendedor extends StatefulWidget {
   const HomeVendedor({super.key});
-
-  @override
-  State<HomeVendedor> createState() => _HomeVendedorState();
+    @override
+  State<HomeVendedor> createState() => _HomeVendedor();
 }
 
-class _HomeVendedorState extends State<HomeVendedor> {
+class _HomeVendedor extends State<HomeVendedor> {
 
-  List<Product> listProducts = [
-    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", 5),
-    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", 5),
-    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", 5),
-    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", 5),
-    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", 5),
-    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", 5),
+   final List<Map<String, dynamic>> produtos = [
+    {
+      'nome': 'Tênis da nike',
+      'estoque': 10,
+      'imagem': 'https://via.placeholder.com/150',
+    },
+    {
+      'nome': 'Tênis sei la ',
+      'estoque': 5,
+      'imagem': 'https://via.placeholder.com/150',
+    },
+    {
+      'nome': 'Tênis homem',
+      'estoque': 8,
+      'imagem': 'https://via.placeholder.com/150',
+    },
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: const TopBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: ListView(
+     appBar: const TopBar(),
+      body: SingleChildScrollView(// faz com que tenha a barra de rolagem
+        child: Column(//organiza em coluna
+          crossAxisAlignment: CrossAxisAlignment.start,//define o alinhamento "lateral" dos filhos de uma Column  start = alinha tudo à esquerda
           children: [
-            Container(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 24,
-                    backgroundColor: Colors.grey.shade300,
-                    child: Icon(Icons.person, color: AppColors.azulEscuro),
-                  ),
-                  const SizedBox(width: 12),
-                  Column(
-                    children: [
-                      Text(
-                        "Olá, Nome!",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.azulEscuro,
-                        ),
-                      ),
-                      Text(
-                        "Vendas do Mês: 0",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.azulEscuro,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    child: Image.asset('banner ajustado.png')
-                  ),
-                  const SizedBox(height: 10),
-                  Column(
-                    children: [
-                      Text('Produtos mais vendidos'),
-                      Row(
-                        children: [
-                        ListView.builder(
-                          itemCount: listProducts.length,
-                          itemBuilder: (context, index) {
-                            final product = listProducts[index];
-                            return Align(
-                              alignment: Alignment.center, // centraliza horizontalmente
-                              child: SizedBox(
-                                width: 350,  // largura fixa desejada
-                                child: Container(
-                                  height: 160,
-                                  margin: EdgeInsets.symmetric(vertical: 6),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: AppColors.azulEscuro,
-                                      width: 1.5,
-                                    ),
-                                    borderRadius: BorderRadius.circular(15),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color(0x40000000),
-                                        blurRadius: 8,
-                                        offset: Offset(0, 5)
-                                      ),
-                                    ],
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
-                                      child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                                      children: [
-                                        SizedBox(
-                                          height: double.infinity,
-                                          child: Image.asset(
-                                            product.image,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            padding: EdgeInsets.all(8), 
-                                            decoration: BoxDecoration(
-                                              color: AppColors.cinzaClaro,
-                                            ),
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  product.name,
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: AppColors.azulEscuro,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "Estoque: ${product.stock.toString()}",
-                                                  style: TextStyle(
-                                                    fontSize: 16,
-                                                    color: AppColors.azulEscuro
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                      Text('Produtos com maior comissão'),
+            // VENDEDOR
+            ListTile(// cria uma lista horizontal
+              leading: CircleAvatar(child: Icon(Icons.person)),// cria um circulo com o icone dentro
+              title: Text('Nome do Vendedor'),// texto
+              subtitle: Text('Vendas do Mês: 0'),//texto
+            ),
 
+            // BANNER
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),//Dá espaço (margem interna) de 30 pixels só nos lados (esquerda e direita)
+              child: Container(// filho
+                height: 180,// altura
+                width: double.infinity,//tamanho
+                decoration: BoxDecoration(
+                  color: Colors.orange.shade50,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      // Lado esquerdo
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('FootLine', style: TextStyle(fontWeight: FontWeight.bold)),
+                            SizedBox(height: 8),
+                            Text('Bora bater a\nmeta do mês?', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                            SizedBox(height: 8),
+                            Text('Tiremações comissão estoques'),
+                            SizedBox(height: 8),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.orange,
+                              ),
+                              child: Text('Ver Relatórios'),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Lado direito (gráfico fictício)
+                      Container(
+                        width: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.indigo,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Icon(Icons.show_chart, color: Colors.orangeAccent, size: 40),
+                        ),
+                      ),
                     ],
-                  )
-                ],
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: 18),// espaco do banner para os cards
+
+            // PRODUTOS MAIS VENDIDOS
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),// espaçamento entre os cards
+              child: Text('Produtos mais vendidos', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),// filho do padding
+            ),
+
+            SizedBox(// tamanho
+              height: 200,// altura
+              child: ListView.builder(// lista horizontal
+                scrollDirection: Axis.horizontal,
+                itemCount: produtos.length,//tamanho da lista
+                itemBuilder: (context, index) {
+                  final produto = produtos[index];//chama a posicao do produto na lista
+                  return productCard(produto);//retorna no card
+                },
+              ),
+            ),
+
+            // PRODUTOS COM MAIOR COMISSÃO
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),// espaçamento entre os cards
+              child: Text('Produtos com maior comissão', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            ),
+
+            SizedBox(//usado para definir um espaço fixo ou dar tamanho a um filho.
+              height: 200,// altura
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: produtos.length,
+                itemBuilder: (context, index) {
+                  final produto = produtos[index];
+                  return productCard(produto);
+                },
               ),
             ),
           ],
         ),
-      )
+      ),
+    );
+  }
+
+  Widget productCard(Map<String, dynamic> produto) {// FUNÇÃO PRODUCTCARD simula um card
+    return Container(// configurações de um card
+      width: 160,
+      margin: EdgeInsets.only(left: 16, top: 8, bottom: 8),//
+      padding: EdgeInsets.all(8),//espaço dentro do card
+      decoration: BoxDecoration(// objeto que decora visualmente o Container, como borda, cor de fundo ,etc
+        color: Colors.white,//cor do card
+        border: Border.all(color: Colors.grey.shade300),//cor da borda
+        borderRadius: BorderRadius.circular(15),//borda redonda
+      ),
+      child: Column(// cria uma coluna
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Imagem
+          Container(
+            height: 90,
+            width: double.infinity,
+            color: Colors.grey.shade300,
+            child: Center(child: Text('Imagem do tênis')),
+          ),
+          SizedBox(height: 8),//usado para definir um espaço fixo ou dar tamanho a um filho.
+          Text(produto['nome'], style: TextStyle(fontWeight: FontWeight.bold)),
+          SizedBox(height: 4),//espaço entre os textos
+          Text('Estoque: ${produto['estoque']}', style: TextStyle(fontWeight: FontWeight.bold)),
+        ],
+      ),
     );
   }
 }

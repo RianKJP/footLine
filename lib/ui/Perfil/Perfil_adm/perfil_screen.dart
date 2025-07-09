@@ -73,7 +73,7 @@ void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const NavBarConfig(initialIndex: 4),
+                    builder: (_) => const NavBarConfig(initialIndex: 4,isVendedor: false,),
                   ),
                 );
               } else {
@@ -169,11 +169,11 @@ void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
             Row(
               children: const [
                 Expanded(
-                  child: _ResumoBox(title: "Vendas esse mês", value: "25"),
+                  child: _ResumoBox(title: "Vendas esse mês", value: "0"),
                 ),
                 SizedBox(width: 12),
                 Expanded(
-                  child: _ResumoBox(title: "Produtos vendidos", value: "30"),
+                  child: _ResumoBox(title: "Produtos vendidos", value: "0"),
                 ),
               ],
             ),
@@ -199,8 +199,8 @@ void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
                 Expanded(
                   child: _MetaBox(
                     title: "Vendas Realizadas",
-                    value: "R\$ 8.000",
-                    percent: "+10%",
+                    value: "R\$ 0",
+                    percent: "0%",
                     percentColor: Colors.green,
                   ),
                 ),
@@ -208,8 +208,8 @@ void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
                 Expanded(
                   child: _MetaBox(
                     title: "Meta de Vendas",
-                    value: "R\$ 10.000",
-                    percent: "-20%",
+                    value: "R\$ 0",
+                    percent: "0%",
                     percentColor: Colors.red,
                   ),
                 ),
@@ -250,7 +250,7 @@ void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const NavBarConfig(initialIndex: 3)),
+                    MaterialPageRoute(builder: (context) => const NavBarConfig(initialIndex: 3,isVendedor: false)),
                   );
                 },
                 child: const Text("Painel de Permissão",style: TextStyle(color: AppColors.azulEscuro),),

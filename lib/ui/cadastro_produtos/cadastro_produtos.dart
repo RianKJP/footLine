@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
-import 'package:footline/ui/estoque_screen/estoque_screen.dart';
+import 'package:footline/ui/estoque_screen/estoque_adm/estoque_screen.dart';
 import 'package:footline/ui/widget/top_bar.dart';
 
 class CadastroProdutos extends StatefulWidget{

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:footline/ui/_core/app_colors.dart'; // ← usa suas cores
+import 'package:footline/ui/_core/app_colors.dart';
 
 class NavBarBottom extends StatelessWidget {
   final int activeIndex;

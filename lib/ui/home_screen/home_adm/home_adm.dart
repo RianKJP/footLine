@@ -55,7 +55,7 @@ void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const NavBarConfig(initialIndex: 4),
+                    builder: (_) => const NavBarConfig(initialIndex: 4,isVendedor: false),
                   ),
                 );
               } else {

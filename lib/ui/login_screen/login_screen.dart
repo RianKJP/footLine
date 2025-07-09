@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
-import 'package:footline/ui/p%C3%B3s_login/aguardando_acesso/aguardado_acesso.dart';
-import 'package:footline/ui/p%C3%B3s_login/confirma%C3%A7%C3%A3o_Adm/confirmacao_adm.dart';
+import 'package:footline/ui/home_screen/nav_bar_config.dart';
+import 'package:footline/ui/p%C3%B3s_login/confirma%C3%A7%C3%A3o_Adm/confirmacao_Adm.dart';
 import 'package:quickalert/quickalert.dart';
 
 
@@ -113,7 +113,7 @@ void _mostrarAlertaNaoADM(BuildContext context) {
               TextFormField(
                 controller: _idControler,
                 decoration: InputDecoration(
-                  hintText: 'Digite seu ID do vendedor',
+                  hintText: 'Digite seu ID',
                   hintStyle: const TextStyle(color: Colors.black38),
                   filled: true,
                   fillColor: AppColors.cinzaClaro,
@@ -192,7 +192,7 @@ void _mostrarAlertaNaoADM(BuildContext context) {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const AguardadoAcesso(),
+                          builder: (context) => const NavBarConfig(initialIndex: 0,isVendedor: true),
                         ),
                       );
                     } else {

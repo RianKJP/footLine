@@ -46,7 +46,7 @@ class ConfirmacaoLoginAdm extends StatelessWidget {
                     children: [
                       Center(
                         child: Text(
-                          "Acesso liberado!",
+                          "Você está logado como Administrador",
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w800,
@@ -57,15 +57,50 @@ class ConfirmacaoLoginAdm extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 20),
+                      const Text(
+                        "Com esse acesso, você tem permissões adicionais, como:",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.branco,
+                          fontFamily: "Sora",
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      const Padding(
+                        padding: EdgeInsets.only(left: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("• Autorizar ou bloquear o acesso de funcionários",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: AppColors.branco,
+                                    fontFamily: "Sora")),
+                            Text("• Cadastrar e editar produtos na plataforma",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: AppColors.branco,
+                                    fontFamily: "Sora")),
+                            Text("• Visualizar relatórios de desempenho da equipe",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: AppColors.branco,
+                                    fontFamily: "Sora")),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
                       Center(
-                        child: const Text(
-                          "Seu cadastro foi aprovado. Agora você já pode acessar todas as funcionalidades do FootLine.",
-                          style: TextStyle(
+                        child: Text(
+                          "Use essas funções para manter o controle e melhorar os resultados da sua operação.",
+                          style: const TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w800,
                             color: AppColors.branco,
                             fontFamily: "Sora",
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                       const Spacer(),
@@ -85,7 +120,7 @@ class ConfirmacaoLoginAdm extends StatelessWidget {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(builder: (context) {
-                                return const NavBarConfig();
+                                return const NavBarConfig(isVendedor: false,);
                               }),
                             );
                           },
@@ -99,7 +134,6 @@ class ConfirmacaoLoginAdm extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
                     ],
                   ),
                 ),

@@ -60,7 +60,7 @@ class _PainelPermissaoScreenState extends State<PainelPermissaoScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              const NavBarConfig(initialIndex: 2),
+                              const NavBarConfig(initialIndex: 2,isVendedor: false,),
                         ),
                       );
                     },
