@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
-import 'package:footline/ui/cadastro_produtos/cadastro_produtos.dart';
 import 'package:footline/ui/home_screen/nav_bar_config.dart';
 import 'package:footline/ui/widget/top_bar.dart';
 import 'package:footline/ui/product_screen/product_screen.dart';
@@ -38,7 +37,7 @@ class _EstoqueScreenState extends State<EstoqueScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TopBar(notificationCount: 3),
+      appBar: const TopBar(),
       
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.azulEscuro,
@@ -62,10 +61,10 @@ class _EstoqueScreenState extends State<EstoqueScreen> {
 
           Container(
             alignment: Alignment.center,
-            margin: EdgeInsets.symmetric(vertical: 12),
+            margin: EdgeInsets.symmetric(vertical: 8),
 
             child: SizedBox(
-              width: 329,
+              width: 350,
               child: TextField(
                 controller: controllerSearch,
                 style: TextStyle(
@@ -89,7 +88,7 @@ class _EstoqueScreenState extends State<EstoqueScreen> {
           ),
 
           Container(
-            width: 329,
+            width: 350,
             alignment: Alignment.center,
             child: Text(
               "Lista de Produtos",
@@ -110,14 +109,14 @@ class _EstoqueScreenState extends State<EstoqueScreen> {
                 return Align(
                   alignment: Alignment.center, // centraliza horizontalmente
                   child: SizedBox(
-                    width: 329,  // largura fixa desejada
+                    width: 350,  // largura fixa desejada
                     child: Container(
-                      height: 150,
+                      height: 160,
                       margin: EdgeInsets.symmetric(vertical: 6),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: AppColors.pretoEscuro,
-                          width: 0.5,
+                          color: AppColors.azulEscuro,
+                          width: 1.5,
                         ),
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
@@ -153,38 +152,39 @@ class _EstoqueScreenState extends State<EstoqueScreen> {
                                     Text(
                                       product.name,
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 18,
                                         color: AppColors.azulEscuro,
                                       ),
                                     ),
                                     Text(
                                       "R\$ ${product.price.toString()}",
                                       style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 16,
                                         color: AppColors.laranja, 
                                       ),
                                     ),
                                     Text(
                                       "Estoque: ${product.stock.toString()}",
                                       style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 16,
                                         color: AppColors.azulEscuro
                                       ),
                                     ),
                                     Text(
                                       "Categoria: ${product.category}",
                                       style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 16,
                                         color: AppColors.azulEscuro
                                       ),
                                     ),
+                                    const SizedBox(height:5),
                                     Align(
                                       alignment: Alignment.center,
                                       child: TextButton(
                                         style: TextButton.styleFrom(
                                           backgroundColor: AppColors.laranja,
                                           foregroundColor: AppColors.azulEscuro,
-                                          minimumSize: Size(158, 32),
+                                          minimumSize: Size(155, 40),
                                         ),
                                         onPressed: () {
                                           Navigator.push(

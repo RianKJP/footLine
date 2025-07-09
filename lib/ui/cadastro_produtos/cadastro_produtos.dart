@@ -15,7 +15,7 @@ class _CadastroProdutosState extends State<CadastroProdutos>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TopBar(notificationCount: 1,),
+      appBar: const TopBar(),
       body: Column(
         children: [
           Container(

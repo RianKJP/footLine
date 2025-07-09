@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:footline/ui/Painel_Permiss%C3%A3o/painel_permissao.dart';
+import 'package:footline/ui/Perfil/Pefil_vendedor/perfil_screen.dart';
 import 'package:footline/ui/Perfil/Perfil_adm/perfil_screen.dart';
 import 'package:footline/ui/cadastro_produtos/cadastro_produtos.dart';
 import 'package:footline/ui/estoque_screen/estoque_screen.dart';
@@ -26,6 +27,7 @@ class _NavBarConfigState extends State<NavBarConfig> {
     PainelPermissaoScreen(),
     RelatorioLojaScreen(),
     CadastroProdutos(),
+    PerfilScreenVendedor(),
   ];
 
   @override

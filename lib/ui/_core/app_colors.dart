@@ -7,4 +7,5 @@ abstract class AppColors {
   static const Color cinzaClaro = Color(0xFFF5F5F5);
   static const Color branco = Color(0xFFFFFFFF);
   static const Color verde = Color(0xFF02871F);
+  static const Color vermelho = Color(0xFFA70202);
 }

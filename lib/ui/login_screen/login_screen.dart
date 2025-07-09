@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
-import 'package:footline/ui/confirmação_login/confirmacao_login.dart';
+import 'package:footline/ui/p%C3%B3s_login/aguardando_acesso/aguardado_acesso.dart';
+import 'package:footline/ui/p%C3%B3s_login/confirma%C3%A7%C3%A3o_Adm/confirmacao_adm.dart';
 import 'package:quickalert/quickalert.dart';
 
 
@@ -15,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _idControler = TextEditingController();
   bool _inputSenha = false;
+  final idVendedor = '1122';
 
   @override
   void initState() {
@@ -28,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     });
   }
+  
 
   @override
   void dispose() {
@@ -38,11 +41,10 @@ class _LoginScreenState extends State<LoginScreen> {
 void _mostrarAlertaNaoADM(BuildContext context) {
   QuickAlert.show(
     context: context,
-    type: QuickAlertType.warning,
-    title: 'Recurso Premium',
-    text: 'Este recurso está disponível apenas para usuários Premium. '
-          'Faça upgrade para desbloquear essa funcionalidade exclusiva!',
-    confirmBtnText: 'Entendi',
+    type: QuickAlertType.error,
+    title: 'Erro',
+    text: 'Id incorreto ou inexistente. ',
+    confirmBtnText: 'Tentar Novamente',
     confirmBtnColor: AppColors.azulEscuro,
   );
 }
@@ -183,7 +185,14 @@ void _mostrarAlertaNaoADM(BuildContext context) {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ConfirmacaoLogin(),
+                          builder: (context) => const ConfirmacaoLoginAdm(),
+                        ),
+                      );
+                    }  else if (_idControler.text.trim().toLowerCase() == idVendedor) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AguardadoAcesso(),
                         ),
                       );
                     } else {

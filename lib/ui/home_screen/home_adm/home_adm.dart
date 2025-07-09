@@ -75,15 +75,24 @@ void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
   );
 }
 
+final List<RecentActivityItem> atividadesRecentes = [
+  const RecentActivityItem(
+    icon: Icons.person,
+    title: "Solicitação de acesso",
+    subtitle: "Permissão Requerida",
+    time: "Hoje às 14:22",
+  ),
+];
+
 
 class _HomeAdm extends State<HomeAdm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const TopBar(notificationCount: 2),
+      appBar: const TopBar(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: ListView(
           children: [
             Container(
@@ -120,9 +129,9 @@ class _HomeAdm extends State<HomeAdm> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: const [
-                  Expanded(child: _AdminCard(title: "Equipe Ativa", value: "10")),
+                  Expanded(child: _AdminCard(title: "Equipe Ativa", value: "0")),
                   SizedBox(width: 8),
-                  Expanded(child: _AdminCard(title: "Pedidos de Acesso Pendentes", value: "2")),
+                  Expanded(child: _AdminCard(title: "Pedidos de Acesso Pendentes", value: "0")),
                 ],
               ),
             ),
@@ -136,12 +145,12 @@ class _HomeAdm extends State<HomeAdm> {
                   Expanded(
                     child: _AdminCard(
                       title: "Comissão Total do Mês",
-                      value: "R\$ 1.200,00",
+                      value: "R\$ 0",
                       isMoney: true,
                     ),
                   ),
                   SizedBox(width: 8),
-                  Expanded(child: _AdminCard(title: "Total de Produtos Cadastrados", value: "150")),
+                  Expanded(child: _AdminCard(title: "Total de Produtos Cadastrados", value: "0")),
                 ],
               ),
             ),
@@ -184,7 +193,7 @@ class _HomeAdm extends State<HomeAdm> {
                     width: 180,
                     child: CircularProgressIndicator(
                       strokeWidth: 40,
-                      value: 0.6,
+                      value: 0.0,
                       backgroundColor: AppColors.laranja,
                       valueColor: AlwaysStoppedAnimation<Color>(AppColors.azulEscuro),
                     ),
@@ -193,7 +202,7 @@ class _HomeAdm extends State<HomeAdm> {
                     mainAxisSize: MainAxisSize.min,
                     children: const [
                       Text(
-                        "60%",
+                        "0%",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
@@ -213,33 +222,27 @@ class _HomeAdm extends State<HomeAdm> {
             ),
 
             const SizedBox(height: 32),
-
-            const Text(
-              "Atividades Recentes",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            ),
-            const SizedBox(height: 8),
-
             Column(
-              children: const [
-                RecentActivityItem(
-                  icon: Icons.add_box,
-                  title: "Novo produto adicionado",
-                  subtitle: "Tênis AirMax",
-                  time: "Hoje às 14:22",
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Text(
+                    "Atividades Recentes",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                 ),
-                RecentActivityItem(
-                  icon: Icons.access_alarm_outlined,
-                  title: "Solicitação de acesso",
-                  subtitle: "João Silva",
-                  time: "Ontem às 09:15",
-                ),
-                RecentActivityItem(
-                  icon: Icons.shopping_cart,
-                  title: "Venda - Vendedor Joao",
-                  subtitle: "R\$ 739,00",
-                  time: "Ontem às 16:45",
-                ),
+                atividadesRecentes.isEmpty
+                    ? const Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          "Nenhuma atividade recente.",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      )
+                    : Column(
+                        children: atividadesRecentes,
+                      ),
               ],
             ),
           ],

@@ -9,7 +9,7 @@ class RelatorioLojaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TopBar(notificationCount: 2),
+      appBar: const TopBar(),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: ListView(
@@ -28,7 +28,7 @@ class RelatorioLojaScreen extends StatelessWidget {
               child: Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back),
+                    icon: const Icon(Icons.arrow_back_ios_new),
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,

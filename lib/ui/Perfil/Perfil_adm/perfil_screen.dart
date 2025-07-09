@@ -98,7 +98,7 @@ void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.branco,
-      appBar: const TopBar(notificationCount: 2),
+      appBar: const TopBar(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(

@@ -36,9 +36,11 @@ class _PainelPermissaoScreenState extends State<PainelPermissaoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TopBar(notificationCount: 2),
+      appBar: const TopBar(),
       backgroundColor: Colors.white,
-      body: ListView(
+      body:SafeArea(
+        child: ListView(
+        padding: EdgeInsets.zero,
         children: [
           // Subnavbar com botão de edição
           Container(
@@ -51,15 +53,18 @@ class _PainelPermissaoScreenState extends State<PainelPermissaoScreen> {
             ),
             child: Row(
               children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const NavBarConfig(initialIndex: 3)),
-                    );
-                  },
-                ),
+                 IconButton(
+                    icon: const Icon(Icons.arrow_back_ios_new),
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const NavBarConfig(initialIndex: 2),
+                        ),
+                      );
+                    },
+                  ),
                 const SizedBox(width: 8),
                 const Expanded(
                   child: Text(
@@ -133,8 +138,10 @@ class _PainelPermissaoScreenState extends State<PainelPermissaoScreen> {
                     ],
                   ),
                 ),
-              )),
-        ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
