@@ -109,14 +109,14 @@ class _EstoqueScreenState extends State<EstoqueScreen> {
                 return Align(
                   alignment: Alignment.center, // centraliza horizontalmente
                   child: SizedBox(
-                    width: 350,  // largura fixa desejada
+                    width: 329,  // largura fixa desejada
                     child: Container(
-                      height: 180,
+                      height: 150,
                       margin: EdgeInsets.symmetric(vertical: 6),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: AppColors.azulEscuro,
-                          width: 1.5,
+                          color: AppColors.pretoEscuro,
+                          width: 0.5,
                         ),
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
@@ -152,39 +152,38 @@ class _EstoqueScreenState extends State<EstoqueScreen> {
                                     Text(
                                       product.name,
                                       style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         color: AppColors.azulEscuro,
                                       ),
                                     ),
                                     Text(
                                       "R\$ ${product.price.toString()}",
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         color: AppColors.laranja, 
                                       ),
                                     ),
                                     Text(
                                       "Estoque: ${product.stock.toString()}",
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         color: AppColors.azulEscuro
                                       ),
                                     ),
                                     Text(
                                       "Categoria: ${product.category}",
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         color: AppColors.azulEscuro
                                       ),
                                     ),
-                                    const SizedBox(height:5),
                                     Align(
                                       alignment: Alignment.center,
                                       child: TextButton(
                                         style: TextButton.styleFrom(
                                           backgroundColor: AppColors.laranja,
                                           foregroundColor: AppColors.azulEscuro,
-                                          minimumSize: Size(155, 40),
+                                          minimumSize: Size(158, 32),
                                         ),
                                         onPressed: () {
                                           Navigator.push(
