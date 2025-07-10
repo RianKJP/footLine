@@ -272,7 +272,7 @@ void _mostrarAlertaEmDesenvolvimento(BuildContext context) {
                     MaterialPageRoute(builder: (context) => const LoginScreen()),
                   );
                 },
-                child: const Text("Sair da Conta", style: TextStyle(color: Color.fromARGB(255, 243, 12, 12)),),
+                child: const Text("Sair da Conta", style: TextStyle(color: AppColors.branco),),
               ),
             ),
           ],

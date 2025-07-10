@@ -157,13 +157,13 @@ class RelatorioLojaScreen extends StatelessWidget {
                       gridData: FlGridData(show: true),
                       borderData: FlBorderData(show: false),
                       barGroups: [
-                        BarChartGroupData(x: 0, barRods: [BarChartRodData(toY: 18, color: Colors.grey)]),
-                        BarChartGroupData(x: 1, barRods: [BarChartRodData(toY: 12, color: Colors.grey)]),
-                        BarChartGroupData(x: 2, barRods: [BarChartRodData(toY: 9, color: Colors.grey)]),
-                        BarChartGroupData(x: 3, barRods: [BarChartRodData(toY: 14, color: Colors.grey)]),
-                        BarChartGroupData(x: 4, barRods: [BarChartRodData(toY: 11, color: Colors.grey)]),
-                        BarChartGroupData(x: 5, barRods: [BarChartRodData(toY: 16, color: Colors.grey)]),
-                        BarChartGroupData(x: 6, barRods: [BarChartRodData(toY: 10, color: Colors.grey)]),
+                        BarChartGroupData(x: 0, barRods: [BarChartRodData(toY: 0, color: Colors.grey)]),
+                        BarChartGroupData(x: 1, barRods: [BarChartRodData(toY: 0, color: Colors.grey)]),
+                        BarChartGroupData(x: 2, barRods: [BarChartRodData(toY: 0, color: Colors.grey)]),
+                        BarChartGroupData(x: 3, barRods: [BarChartRodData(toY: 0, color: Colors.grey)]),
+                        BarChartGroupData(x: 4, barRods: [BarChartRodData(toY: 0, color: Colors.grey)]),
+                        BarChartGroupData(x: 5, barRods: [BarChartRodData(toY: 0, color: Colors.grey)]),
+                        BarChartGroupData(x: 6, barRods: [BarChartRodData(toY: 0, color: Colors.grey)]),
                       ],
                     ),
                   ),
@@ -184,42 +184,50 @@ class RelatorioLojaScreen extends StatelessWidget {
             const _VendedorItem(nome: "Pedro", valor: "R\$ 0"),
 
             const SizedBox(height: 24),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: AppColors.branco,
-                  foregroundColor: AppColors.azulEscuro,
-                  side: const BorderSide(color: AppColors.azulEscuro, width: 2),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 45,
+                width: 300,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: AppColors.branco,
+                    foregroundColor: AppColors.azulEscuro,
+                    side: const BorderSide(color: AppColors.azulEscuro, width: 2),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const NavBarConfig(initialIndex: 3, isVendedor: false)),
+                    );
+                  },
+                  child: const Text(
+                    "Exibir todos os vendedores",
+                    style: TextStyle(color: AppColors.azulEscuro),
+                  ),
                 ),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const NavBarConfig(initialIndex: 3, isVendedor: false),
-                    ),
-                  );
-                },
-                child: const Text("Exibir todos os vendedores"),
               ),
-            ),
-            const SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SizedBox(
-                width: double.infinity,
-                height: 40,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
+              const SizedBox(height: 16),
+              SizedBox(
+                height: 45,
+                width: 300,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: AppColors.pretoEscuro,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
                   onPressed: () {},
-                  child: const Text("Exportar Relatório"),
+                  child: const Text(
+                    "Exportar Relatório",
+                    style: TextStyle(color: AppColors.branco),
+                  ),
                 ),
               ),
-            ),
+            ],
+          ),
+
             const SizedBox(height: 24),
           ],
         ),
@@ -325,12 +333,143 @@ class DetalhesVendedorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Detalhes de $nome'),
-        backgroundColor: AppColors.azulEscuro,
-      ),
-      body: const Center(
-        child: Text('Conteúdo detalhado do vendedor'),
+      appBar: const TopBar(),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            // Subnavbar com botão de voltar
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border(
+                  bottom: BorderSide(color: Colors.grey.shade300),
+                ),
+              ),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back_ios_new),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  const Expanded(
+                    child: Text(
+                      "Detalhes do Vendedor",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // Conteúdo scrollável
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Nome e avatar
+                  Row(
+                    children: [
+                      const CircleAvatar(child: Icon(Icons.person)),
+                      const SizedBox(width: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(nome, style: const TextStyle(fontWeight: FontWeight.bold)),
+                          const Text("0", style: TextStyle(color: Colors.grey)),
+                        ],
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 20),
+                  const Text(
+                    "Resumo do Vendedor",
+                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
+                  ),
+                  const SizedBox(height: 12),
+
+                  Row(
+                    children: const [
+                      Expanded(child: _ResumoBox(title: "Vendas esse mês", value: "0")),
+                      SizedBox(width: 12),
+                      Expanded(child: _ResumoBox(title: "Valor de comissões", value: "R\$ 0")),
+                    ],
+                  ),
+
+                  const SizedBox(height: 20),
+                  const Text(
+                    "Metas de Vendas",
+                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
+                  ),
+                  const SizedBox(height: 4),
+                  const Text(
+                    "Desempenho do vendedor",
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                  ),
+                  const SizedBox(height: 12),
+
+                  Row(
+                    children: const [
+                      Expanded(
+                        child: _MetaBox(
+                          title: "Vendas Realizadas",
+                          value: "R\$ 0",
+                          percent: "0%",
+                          percentColor: Colors.green,
+                        ),
+                      ),
+                      SizedBox(width: 12),
+                      Expanded(
+                        child: _MetaBox(
+                          title: "Meta de Vendas",
+                          value: "R\$ 0",
+                          percent: "0%",
+                          percentColor: Colors.red,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 45),
+                  SizedBox(
+                    height: 45,
+                    width: 350,
+                    child: OutlinedButton.icon(
+                      icon: const Icon(Icons.download, color: AppColors.azulEscuro),
+                      label: const Text(
+                        "Download Relatórios de Desempenho",
+                        style: TextStyle(
+                          color: AppColors.azulEscuro,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: AppColors.branco,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      onPressed: () {
+                        // ação ao clicar
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -342,4 +481,78 @@ BoxDecoration _boxStyle() {
     border: Border.all(color: Colors.grey.shade300),
     borderRadius: BorderRadius.circular(8),
   );
+}
+class _ResumoBox extends StatelessWidget {
+  final String title;
+  final String value;
+
+  const _ResumoBox({required this.title, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.shade300),
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.white,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title,
+              style: const TextStyle(fontSize: 12, color: Colors.black54)),
+          const SizedBox(height: 6),
+          Text(value,
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87)),
+        ],
+      ),
+    );
+  }
+}
+
+class _MetaBox extends StatelessWidget {
+  final String title;
+  final String value;
+  final String percent;
+  final Color percentColor;
+
+  const _MetaBox({
+    required this.title,
+    required this.value,
+    required this.percent,
+    required this.percentColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return 
+    Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.shade300),
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.white,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title,
+              style: const TextStyle(fontSize: 12, color: Colors.black54)),
+          const SizedBox(height: 6),
+          Text(value,
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87)),
+          const SizedBox(height: 4),
+          Text(percent,
+              style: TextStyle(fontSize: 12, color: percentColor)),
+        ],
+      ),
+    );
+  }
 }

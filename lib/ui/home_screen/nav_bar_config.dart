@@ -37,7 +37,6 @@ class _NavBarConfigState extends State<NavBarConfig> {
    final List<Widget> _pagesVendedor = const [
     HomeVendedor(),
     EstoqueScreenVD(),
-
     PerfilScreenVendedor(),
   ];
 
