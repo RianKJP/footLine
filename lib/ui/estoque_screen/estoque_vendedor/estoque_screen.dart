@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:footline/ui/_core/app_colors.dart';
+import 'package:footline/ui/home_screen/nav_bar_config.dart';
+import 'package:footline/ui/models/product_model.dart';
+import 'package:footline/ui/service/product_service.dart';
 import 'package:footline/ui/widget/top_bar.dart';
 import 'package:footline/ui/product_screen/product_screen.dart';
-
-class Product{
-  String image;
-  String name;
-  String description;
-  double price;
-  String category;
-  int stock;
-
-  Product(this.image, this.name, this.description, this.price, this.category, this.stock);
-}
 
 class EstoqueScreenVD extends StatefulWidget {
   const EstoqueScreenVD({super.key});
@@ -24,19 +16,27 @@ class EstoqueScreenVD extends StatefulWidget {
 class _EstoqueScreenVDState extends State<EstoqueScreenVD> {
 
   final TextEditingController controllerSearch = TextEditingController();
-  List<Product> listProducts = [
-    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
-    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
-    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
-    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
-    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
-    Product("assets/img/Adidas tenis 2.webp", "Adidas Ultraboost", "Descrição Ficticia", 479.90, "Corrida", 5),
-  ];
+  List<ProductModel> listProducts = [];
+
+  void fetchProduct() async {
+    var listProducts = await ProductService.fetchProduct();
+
+    setState(() {
+      this.listProducts = listProducts;
+    });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    fetchProduct();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const TopBar(),
+
       body: Column(
 
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,14 +92,14 @@ class _EstoqueScreenVDState extends State<EstoqueScreenVD> {
                 return Align(
                   alignment: Alignment.center, // centraliza horizontalmente
                   child: SizedBox(
-                    width: 350,  // largura fixa desejada
+                    width: 329,  // largura fixa desejada
                     child: Container(
-                      height: 180,
+                      height: 150,
                       margin: EdgeInsets.symmetric(vertical: 6),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: AppColors.azulEscuro,
-                          width: 1.5,
+                          color: AppColors.pretoEscuro,
+                          width: 0.5,
                         ),
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
@@ -117,7 +117,7 @@ class _EstoqueScreenVDState extends State<EstoqueScreenVD> {
                           children: [
                             SizedBox(
                               height: double.infinity,
-                              child: Image.asset(
+                              child: Image.network(
                                 product.image,
                                 fit: BoxFit.cover,
                               ),
@@ -134,45 +134,47 @@ class _EstoqueScreenVDState extends State<EstoqueScreenVD> {
                                   children: [
                                     Text(
                                       product.name,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                      softWrap: false,
                                       style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         color: AppColors.azulEscuro,
                                       ),
                                     ),
                                     Text(
                                       "R\$ ${product.price.toString()}",
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         color: AppColors.laranja, 
                                       ),
                                     ),
                                     Text(
                                       "Estoque: ${product.stock.toString()}",
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         color: AppColors.azulEscuro
                                       ),
                                     ),
                                     Text(
-                                      "Categoria: ${product.category}",
+                                      "Categoria: ${product.category.name}",
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 14,
                                         color: AppColors.azulEscuro
                                       ),
                                     ),
-                                    const SizedBox(height: 5),
                                     Align(
                                       alignment: Alignment.center,
                                       child: TextButton(
                                         style: TextButton.styleFrom(
                                           backgroundColor: AppColors.laranja,
                                           foregroundColor: AppColors.azulEscuro,
-                                          minimumSize: Size(155, 40),
+                                          minimumSize: Size(158, 32),
                                         ),
                                         onPressed: () {
                                           Navigator.push(
                                             context,
-                                            MaterialPageRoute(builder: (context) => ProductScreen()),
+                                            MaterialPageRoute(builder: (context) => ProductScreen(product: product)),
                                           );
                                         },
                                         child: Text("Mais Detalhes"),

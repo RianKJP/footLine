@@ -5,6 +5,7 @@ import 'package:footline/ui/Perfil/Perfil_adm/perfil_screen.dart';
 import 'package:footline/ui/cadastro_produtos/cadastro_produtos.dart';
 import 'package:footline/ui/estoque_screen/estoque_adm/estoque_screen.dart';
 import 'package:footline/ui/estoque_screen/estoque_vendedor/estoque_screen.dart';
+import 'package:footline/ui/product_screen/product_screen.dart';
 import 'package:footline/ui/home_screen/home_adm/home_adm.dart';
 import 'package:footline/ui/home_screen/home_vendedor/home_vendedor.dart';
 import 'package:footline/ui/relatorio_Desempenho/relatorio_desempenho.dart';
@@ -31,13 +32,14 @@ class _NavBarConfigState extends State<NavBarConfig> {
     RelatorioLojaScreen(),
     CadastroProdutos(),
     PerfilScreenVendedor(),
-    HomeVendedor()
+    ProductScreen(),
   ];
 
    final List<Widget> _pagesVendedor = const [
     HomeVendedor(),
     EstoqueScreenVD(),
     PerfilScreenVendedor(),
+    ProductScreen(),
   ];
 
  List<Widget> get _pages => widget.isVendedor ? _pagesVendedor : _pagesAdm;

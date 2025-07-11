@@ -1,9 +1,11 @@
+import 'package:footline/ui/models/category_model.dart';
+
 class ProductModel {
   String image;
   String name;
   String? description;
   double price;
-  String category;
+  CategoryModel category;
   int stock;
 
   ProductModel({
@@ -21,7 +23,7 @@ class ProductModel {
         'name': name,
         'description': description,
         'price': price,
-        'category': category,
+        'category': category.id,
         'stock': stock,
       };
     }
@@ -31,8 +33,8 @@ class ProductModel {
         image: json['image'],
         name: json['name'],
         description: json['description'],
-        price: (json['price'] as num).toDouble(),
-        category: (json['category']).toString(),
+        price: double.tryParse(json['price'].toString()) ?? 0.0,
+        category: CategoryModel.fromJson(json['category']),
         stock: json['stock'],
       );
     }

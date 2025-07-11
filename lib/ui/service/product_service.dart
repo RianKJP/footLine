@@ -1,4 +1,5 @@
 import 'dart:io'; // Permite trabalhar com arquivos do sistema;
+import 'dart:convert';
 import 'package:http/http.dart' as http; // Pacote para trabalhar com requisições HTTP;
 import 'package:path/path.dart'; // Fornece funções para manipulação de metadados de arquivos (faltou informação)
 import 'package:http_parser/http_parser.dart'; // Faltou informação
@@ -19,7 +20,7 @@ class ProductService {
       request.fields['description'] = product.description!; // Descrição
     }
     request.fields['price'] = product.price.toString(); // Preço
-    request.fields['category_id'] = product.category; // Categoria
+    request.fields['category_id'] = product.category.id; // Categoria
     request.fields['stock'] = product.stock.toString(); // Quantidade
 
     // REVER A PARTE DA IMAGEM
@@ -36,5 +37,17 @@ class ProductService {
 
     var response = await request.send(); // Envia a requisição para a API e retorna um StreamedResponse
     return await http.Response.fromStream(response); // Converte o StreamedResponse em um Response comum e retorna
+  }
+
+  static Future<List<ProductModel>> fetchProduct() async {
+
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/produtos/'));
+
+    if (response.statusCode == 200) {
+      List<dynamic> data = jsonDecode(utf8.decode(response.bodyBytes));
+      return data.map((json) => ProductModel.fromJson(json)).toList();
+    } else {
+      throw Exception("Erro ao buscar categorias");
+    }
   }
 }

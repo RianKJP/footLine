@@ -27,7 +27,7 @@ class _CadastroProdutosState extends State<CadastroProdutos>{
   final descriptionController = TextEditingController();
   final priceController = TextEditingController();
   final stockController = TextEditingController();
-  String categoryController = ' ';
+  CategoryModel? categoryController;
 
   void fetchCategories() async {
     final categories = await CategoryService.fetchCategories();
@@ -357,13 +357,13 @@ class _CadastroProdutosState extends State<CadastroProdutos>{
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               final category = categories[index];
-                              final isSelected = category.id == categoryController;
+                              final isSelected = categoryController?.id == category.id;
                               return Row(
                                 children: [
                                   OutlinedButton(
                                     onPressed: () {
                                       setState(() {
-                                        categoryController = category.id;
+                                        categoryController = category;
                                       });
                                     },
                                     child: Text(
@@ -415,7 +415,7 @@ class _CadastroProdutosState extends State<CadastroProdutos>{
                           name: nameController.text,
                           description: descriptionController.text.isEmpty ? null : descriptionController.text,
                           price: double.tryParse(priceController.text) ?? 0.0,
-                          category: categoryController.trim(),
+                          category: categoryController!,
                           stock: int.parse(stockController.text),
                         );
                         final response = await ProductService.createProduct(product);
