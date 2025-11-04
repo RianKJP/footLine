@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:footline/ui/home_screen/nav_bar_config.dart';
-import 'package:footline/ui/loading_screen/loading_screen.dart';
+import 'package:footline/modules/onboarding/loading_screen.dart';
 
 void main(List<String> args) {
   runApp(FootLine());
